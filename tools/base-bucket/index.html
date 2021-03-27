@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Base编码解码全家桶 | READFLAG</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/js-cookie/latest/js.cookie.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <header class="navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand"><img src="/logo.png" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/tools">在线工具</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/events">近期赛事</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/platforms">练习平台</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/constants">常量查表</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/softs">软件下载</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/blogs">博客论坛</a>
+                </li>
+                
+            
+                
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/discuss" tabindex="-1" aria-disabled="true">用户交流</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/profile">个人中心</a>
+                </li>
+                
+            
+          </ul>
+        </div>
+        <div class="search-wrap">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜一搜更简单~" onkeydown="search(event)">
+        </div>
+    </nav>
+</header>
+  <div class="container">
+    
+    <div class="justify-content-center">
+        <link rel="stylesheet" href="./css/index.css" type="text/css"/>
+<div id="panel" class="col-md-8 m-auto d-none">
+    <h2 class="text-center my-4">Base编码解码全家桶</h2>
+    <div class="row">
+        <textarea id="message" class="form-control" placeholder="要编码或解码的内容" rows="10"></textarea>
+    </div>
+    <div class="row my-2">
+        <div class="btn-group col-md-4" role="group">
+            <button type="button" class="btn btn-sm btn-primary" id="encode">编码</button>
+            <button type="button" class="btn btn-sm btn-primary" id="decode">解码</button>
+            <button type="button" class="btn btn-sm btn-primary" id="decode_auto" title="支持自动识别算法和多层嵌套">自动解码</button>
+        </div>
+        <div class="btn-group col-md-8 small" role="group">
+            <div class="form-check-inline" id="res_str">
+                <input class="form-check-input" type="radio" name="res_format" value="str" id="f_str" checked>
+                <label class="form-check-label" for="f_str">明文显示字符串</label>
+            </div>
+            <div class="form-check-inline d-none" id="res_oct">
+                <input class="form-check-input" type="radio" name="res_format" value="oct" id="f_oct">
+                <label class="form-check-label" for="f_oct">明文显示10进制</label>
+            </div>
+            <div class="form-check-inline" id="res_hex">
+                <input class="form-check-input" type="radio" name="res_format" value="hex" id="f_hex">
+                <label class="form-check-label" for="f_hex">明文显示16进制</label>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-secondary border-top-0"></div>
+    <div class="row my-2">
+        <div class="btn-group col-md-8 small" role="group">
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="16" id="b16">
+                <label class="form-check-label" for="b16">Base16</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="32" id="b32">
+                <label class="form-check-label" for="b32">Base32</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="36" id="b36">
+                <label class="form-check-label" for="b36">Base36</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="58" id="b58">
+                <label class="form-check-label" for="b58">Base58</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="62" id="b62">
+                <label class="form-check-label" for="b62">Base62</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="64" id="b64" checked>
+                <label class="form-check-label" for="b64">Base64</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="85" id="b85">
+                <label class="form-check-label" for="b85">Base85</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="91" id="b91">
+                <label class="form-check-label" for="b91">Base91</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="92" id="b92">
+                <label class="form-check-label" for="b92">Base92</label>
+            </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="base" value="100" id="b100">
+                <label class="form-check-label" for="b100">Base100</label>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-secondary border-top-0"></div>
+    <div class="row my-2 small">
+        <label class="col-form-label">算法（通常保持默认就好）：</label>
+        <div class="col-form-label col-sm-9">
+            <div class="form-check-inline float-left b32">
+                <input class="form-check-input" type="radio" name="base32" value="rfc4648" id="base321" checked>
+                <label class="form-check-label" for="base321">默认（RFC4648）</label>
+            </div>
+            <div class="form-check-inline float-left b32">
+                <input class="form-check-input" type="radio" name="base32" value="gmp" id="base322">
+                <label class="form-check-label" for="base322">RCF4684 HEX/GMP</label>
+            </div>
+            <div class="form-check-inline float-left b32">
+                <input class="form-check-input" type="radio" name="base32" value="crockford" id="base323">
+                <label class="form-check-label" for="base323">CROCKFORD</label>
+            </div>
+            <div class="form-check-inline float-left b32">
+                <input class="form-check-input" type="radio" name="base32" value="zbase32" id="base324">
+                <label class="form-check-label" for="base324">ZBASE32</label>
+            </div>
+            <div class="form-check-inline float-left b58">
+                <input class="form-check-input" type="radio" name="base58" value="pure" id="base581" checked>
+                <label class="form-check-label" for="base581">默认（BITCOIN/IPFS）</label>
+            </div>
+            <div class="form-check-inline float-left b58">
+                <input class="form-check-input" type="radio" name="base58" value="gmp" id="base582">
+                <label class="form-check-label" for="base582">GMP</label>
+            </div>
+            <div class="form-check-inline float-left b58">
+                <input class="form-check-input" type="radio" name="base58" value="flickr" id="base583">
+                <label class="form-check-label" for="base583">FLICKR</label>
+            </div>
+            <div class="form-check-inline float-left b58">
+                <input class="form-check-input" type="radio" name="base58" value="ripple" id="base584">
+                <label class="form-check-label" for="base584">RIPPLE</label>
+            </div>
+            <div class="form-check-inline float-left b62">
+                <input class="form-check-input" type="radio" name="base62" value="pure" id="base621" checked>
+                <label class="form-check-label" for="base621">默认</label>
+            </div>
+            <div class="form-check-inline float-left b62">
+                <input class="form-check-input" type="radio" name="base62" value="gmp" id="base622">
+                <label class="form-check-label" for="base622">GMP</label>
+            </div>
+            <div class="form-check-inline float-left b62">
+                <input class="form-check-input" type="radio" name="base62" value="62x" id="base623">
+                <label class="form-check-label" for="base623">base62x</label>
+            </div>
+            <div class="form-check-inline float-left b85">
+                <input class="form-check-input" type="radio" name="base85" value="ascii85" id="base851" checked>
+                <label class="form-check-label" for="base851">默认（ascii85）</label>
+            </div>
+            <div class="form-check-inline float-left b85">
+                <input class="form-check-input" type="radio" name="base85" value="adobe_ascii85" id="base852">
+                <label class="form-check-label" for="base852">adobe_ascii85</label>
+            </div>
+            <div class="form-check-inline float-left b85">
+                <input class="form-check-input" type="radio" name="base85" value="zeromq" id="base853">
+                <label class="form-check-label" for="base853">zeromq</label>
+            </div>
+            <div class="form-check-inline float-left b85">
+                <input class="form-check-input" type="radio" name="base85" value="rfc1924" id="base854">
+                <label class="form-check-label" for="base854">rfc1924</label>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-secondary border-top-0"></div>
+    <div class="row my-2 small">
+        <label for="table" class="col-form-label">换表：</label>
+        <div class="col-sm-11">
+            <input type="input" name="table" class="form-control" id="table">
+        </div>
+    </div>
+    <div class="row">
+        <textarea id="baseMessage" class="form-control" rows="10" readonly></textarea>
+    </div>
+</div>
+<script src="./js/index.js"></script>
+    </div>
+
+
+  </div>
+  <footer id="footer">
+    <div id="footer-link" class="footer-inner">
+        <a href="/history">更新历史</a> | <a target="_blank" rel="noopener" href="https://jq.qq.com/?_wv=1027&k=Z5QEIEu2">加入群聊</a>
+    </div>
+    <!-- <div><a>当前注册人数：</a></div> -->
+    <div id="footer-inner" class="footer-inner">
+        ©CopyRight 2020-2022 readflag.cn All Rights Reserved.
+    </div>
+</footer>
+  
+<script src="/js/header.js"></script>
+
+</body>
+</html>

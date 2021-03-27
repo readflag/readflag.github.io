@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>rot13 | READFLAG</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/js-cookie/latest/js.cookie.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <header class="navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand"><img src="/logo.png" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/tools">在线工具</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/events">近期赛事</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/platforms">练习平台</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/constants">常量查表</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/softs">软件下载</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/blogs">博客论坛</a>
+                </li>
+                
+            
+                
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/discuss" tabindex="-1" aria-disabled="true">用户交流</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/profile">个人中心</a>
+                </li>
+                
+            
+          </ul>
+        </div>
+        <div class="search-wrap">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜一搜更简单~" onkeydown="search(event)">
+        </div>
+    </nav>
+</header>
+  <div class="container">
+    
+    <div class="justify-content-center">
+        <div id="contents" class="col-md-8 m-auto">
+    <h2 class="text-center my-4"><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ROT13">关于ROT13</a></h2>
+    <div class="row">
+        <textarea id="input" class="form-control" rows="12" onkeyup="update()" onchange="update()" autofocus=""></textarea>
+    </div>
+    <div class="row my-2">
+        <div class="input-group col-sm-3 m-auto">
+            <select class="custom-select" id="rot" onchange="update()">
+                <option value="1">ROT1</option>
+                <option value="2">ROT2</option>
+                <option value="3">ROT3</option>
+                <option value="4">ROT4</option>
+                <option value="5">ROT5</option>
+                <option value="6">ROT6</option>
+                <option value="7">ROT7</option>
+                <option value="8">ROT8</option>
+                <option value="9">ROT9</option>
+                <option value="10">ROT10</option>
+                <option value="11">ROT11</option>
+                <option value="12">ROT12</option>
+                <option value="13" selected>ROT13</option>
+                <option value="14">ROT14</option>
+                <option value="15">ROT15</option>
+                <option value="16">ROT16</option>
+                <option value="17">ROT17</option>
+                <option value="18">ROT18</option>
+                <option value="19">ROT19</option>
+                <option value="20">ROT20</option>
+                <option value="21">ROT21</option>
+                <option value="22">ROT22</option>
+                <option value="23">ROT23</option>
+                <option value="24">ROT24</option>
+                <option value="25">ROT25</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <textarea id="output" class="form-control" rows="12" readonly></textarea>
+    </div>
+</div>
+<!-- rot13 implementation from http://stackoverflow.com/a/617685/987044 -->
+<script type="text/javascript">
+    function rot(s, i) {
+        return s.replace(/[a-zA-Z]/g, function (c) {
+            return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + i) ? c : c - 26);
+        });
+    }
+    function update() {
+        document.getElementById('output').value = rot(document.getElementById('input').value, +document.getElementById('rot').value);
+    }
+</script>
+    </div>
+
+
+  </div>
+  <footer id="footer">
+    <div id="footer-link" class="footer-inner">
+        <a href="/history">更新历史</a> | <a target="_blank" rel="noopener" href="https://jq.qq.com/?_wv=1027&k=Z5QEIEu2">加入群聊</a>
+    </div>
+    <!-- <div><a>当前注册人数：</a></div> -->
+    <div id="footer-inner" class="footer-inner">
+        ©CopyRight 2020-2022 readflag.cn All Rights Reserved.
+    </div>
+</footer>
+  
+<script src="/js/header.js"></script>
+
+</body>
+</html>

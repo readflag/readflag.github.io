@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; connect-src 'none'; font-src 'none'; form-action 'none'; frame-src 'none'; img-src 'self' data:; manifest-src 'self'; media-src 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'sha256-Ply0TPX/7tBYYftdniiKDO8wB+2bzTqFglgbWvAM9q8='; upgrade-insecure-requests; worker-src 'none'">
+
+    <meta name="description" content="emoji-aes: Encrypt messages with emojis.">
+    <meta name="author" content="Aaron Horler">
+
+    <!-- Privacy -->
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="x-dns-prefetch-control" content="off">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>emoji-aes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#343a40">
+
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+        padding-top: 54px;
+      }
+      @media (min-width: 992px) {
+        body {
+          padding-top: 56px;
+        }
+      }
+      #encryption-toggle-options {
+        display: none;
+      }
+      #decryption-toggle-options {
+        display: none;
+      }
+      .info {
+        font-size: 75%;
+      }
+      .status {
+        font-size: 85%;
+        display: none;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">emoji-aes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#encrypt">Encrypt
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#decrypt">Decrypt</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="mt-5">&#x1F512; <strong>emoji-aes</strong>: Encrypt messages with emojis</h1>
+          <p class="lead">emoji-aes encrypts string data with the symmetric AES encryption cipher (using <a href="https://github.com/brix/crypto-js">crypto-js</a>), and then replaces the Base64 output with emojis.</p>
+        </div>
+
+        <div id="encrypt" class="col-lg-12 text-center">
+          <hr>
+          <h3 class="mt-5">Encrypt</h3>
+          <p class="info">To encrypt, (optionally) select a rotation, enter a message, and then an encryption key. The rotation (if custom), and the key, must be shared with the recipient via a secure channel.</p>
+          <br>
+          <div class="form-group">
+            <p><a id="encryption-toggle" href="#">🔽 Advanced 🔽</a></p>
+            <div id="encryption-toggle-options">
+              <p>
+              <label for="rotation-for-encryption">Rotation:</label>
+              <input id="rotation-for-encryption" type="number" min="0" max="64" value="0">
+              </p>
+              <p>a = <spam id="rotation-for-encryption-demo">🍎</spam></p>
+              <p class="info">The <em>rotation</em> field allows for the one-to-one substition of the Base64 character set with emojis to be rotated.</p>
+            </div>
+            <p>
+              <label for="message-for-encryption">Message</label>
+              <textarea id="message-for-encryption" class="form-control" rows="4" cols="50"></textarea>
+            </p>
+            <p>
+              <label for="key-for-encryption">Key</label>
+              <input id="key-for-encryption" type="password" class="form-control">
+            </p>
+            <p>
+              <button id="encrypt-button" class="btn-primary">Encrypt</button>
+            </p>
+            <p id="encryption-error" class="status text-danger">Error: </p>
+            <p id="encryption-success" class="status text-success">Encrypted!</p>
+          </div>
+        </div>
+
+        <div id="decrypt" class="col-lg-12 text-center">
+          <hr>
+          <h3 class="mt-5">Decrypt</h3>
+          <p class="info">To decrypt, select the agreed rotation (if custom), enter the emoji-aes string, and then the pre-shared encryption key.</p>
+          <br>
+          <div class="form-group">
+            <p><a id="decryption-toggle" href="#">🔽 Advanced 🔽</a></p>
+            <div id="decryption-toggle-options">
+              <p>
+              <label for="rotation-for-decryption">Rotation:</label>
+              <input id="rotation-for-decryption" type="number" min="0" max="64" value="0">
+              </p>
+              <p>a = <spam id="rotation-for-decryption-demo">🍎</spam></p>
+              <p class="info">The <em>rotation</em> field allows for the one-to-one substition of the Base64 character set with emojis to be rotated. This field must match the selection on encryption.</p>
+            </div>
+            <p>
+              <label for="message-for-decryption">Message</label>
+              <textarea id="message-for-decryption" class="form-control" rows="4" cols="50"></textarea>
+            </p>
+            <p>
+              <label for="key-for-decryption">Key</label>
+              <input id="key-for-decryption" type="password" class="form-control">
+            </p>
+            <p>
+              <button id="decrypt-button" class="btn-primary">Decrypt</button>
+            </p>
+            <p id="decryption-error" class="status text-danger">Error: </p>
+            <p id="decryption-success" class="status text-success">Decrypted!</p>
+          </div>
+        </div>
+        <div id="decrypt" class="col-lg-12 text-center">
+          <hr>
+          <p class="info">Developed by Aaron Horler in 2017. <a href="https://github.com/aghorler/emoji-aes">Source</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="vendor/crypto-js-3.1.9-1/crypto-js.js"></script>
+    <script src="js/emoji-aes.js"></script>
+
+  </body>
+
+</html>

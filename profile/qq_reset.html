@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>重置密码 | READFLAG</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/js-cookie/latest/js.cookie.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <header class="navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand"><img src="/logo.png" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/tools">在线工具</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/events">近期赛事</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/platforms">练习平台</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/constants">常量查表</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/softs">软件下载</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/blogs">博客论坛</a>
+                </li>
+                
+            
+                
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/discuss" tabindex="-1" aria-disabled="true">用户交流</a>
+                </li>
+                
+            
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/profile">个人中心</a>
+                </li>
+                
+            
+          </ul>
+        </div>
+        <div class="search-wrap">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜一搜更简单~" onkeydown="search(event)">
+        </div>
+    </nav>
+</header>
+  <div class="container">
+    
+    <div class="justify-content-center">
+        <div id="contents" class="col-sm-5 m-auto login_form">
+  <div class="border border-info shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <h2 class="text-center mb-4">重置密码</h2>
+      <div id="alert" role="alert"></div>
+      <form id="form" onsubmit="return false">
+        <div class="form-group row">
+            <label for="qq" class="col-sm-3 col-form-label text-center">QQ</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" id="qq" name="qq"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-3 col-form-label text-center">新密码</label>
+            <div class="col-sm-9">
+            <input type="password" class="form-control" id="password" name="password"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="code" class="col-sm-3 col-form-label text-center">验证码</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" id="code" name="code" placeholder="加群后发送“重置密码”获取"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 text-right"><a class="text-decoration-none small" href="/profile/register">注册账号</a></div>
+            <div class="col-sm-6"><a class="text-decoration-none small" href="/profile/login">账号登录</a></div>
+        </div>
+        <div class="form-group row">
+          <button type="submit" class="btn btn-primary m-auto col-sm-8" onclick="resetpass()">重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="/js/reset.js"></script>
+    </div>
+
+
+  </div>
+  <footer id="footer">
+    <div id="footer-link" class="footer-inner">
+        <a href="/history">更新历史</a> | <a target="_blank" rel="noopener" href="https://jq.qq.com/?_wv=1027&k=Z5QEIEu2">加入群聊</a>
+    </div>
+    <!-- <div><a>当前注册人数：</a></div> -->
+    <div id="footer-inner" class="footer-inner">
+        ©CopyRight 2020-2022 readflag.cn All Rights Reserved.
+    </div>
+</footer>
+  
+<script src="/js/header.js"></script>
+
+</body>
+</html>
