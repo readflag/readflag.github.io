@@ -18,7 +18,7 @@ $(function (){
                     if(json["qq_id"]){
                         $("#qq").text(json["qq_id"]);
                     }
-                    $("#qq_public").attr("checked", !json["qq_visiable"]);
+                    $("#qq_public").attr("checked", json["qq_visiable"]);
                     if(json["openid"]){
                         $("#openid").text(json["openid"]);
                     }else{

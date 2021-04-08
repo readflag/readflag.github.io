@@ -61,10 +61,14 @@ $(function (){
                     $("#ename").text(data["name"]);
                     $("#elink").text(data["link"]);
                     $("#etype").text(data["type"]);
-                    $("#ebmks").text(data["bmks"]);
-                    $("#ebmjz").text(data["bmjz"]);
-                    $("#ebsks").text(data["bsks"]);
-                    $("#ebsjs").text(data["bsjs"]);
+                    if(data["bmks"])
+                    $("#ebmks").text(new Date(data["bmks"]).Format("yyyy年MM月dd日 hh:mm:ss"));
+                    if(data["bmjz"])
+                    $("#ebmjz").text(new Date(data["bmjz"]).Format("yyyy年MM月dd日 hh:mm:ss"));
+                    if(data["bsks"])
+                    $("#ebsks").text(new Date(data["bsks"]).Format("yyyy年MM月dd日 hh:mm:ss"));
+                    if(data["bsjs"])
+                    $("#ebsjs").text(new Date(data["bsjs"]).Format("yyyy年MM月dd日 hh:mm:ss"));
                     $("#emore").html(data["readmore"]);
                 }else{
                     console.log(res);
