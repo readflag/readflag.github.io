@@ -103,7 +103,21 @@
         
     
         
-            <div id="contents" class="pt-4">
+            <style>
+  #avatar{
+    width: 120px;
+    height: 120px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .custom-file-input:lang(zh) ~ .custom-file-label::after {
+    content: "浏览";
+  }
+  .custom-file-label::after {
+    content: "浏览";
+  }
+</style>
+<div id="contents" class="pt-4">
 <div id="menu" class="row invisible">
     <div class="col-3">
       <div class="list-group" id="list-tab" role="tablist">
@@ -111,6 +125,7 @@
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">头像</a>
         <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">消息</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">设置</a>
+        <a class="list-group-item list-group-item-action" id="list-manager-list" data-toggle="list" href="#list-manager" role="tab" aria-controls="manager">管理</a>
       </div>
     </div>
     <div class="col-9">
@@ -147,14 +162,16 @@
           <div style="margin-top: 20px;"><a href="javascript:logout();">退出登录</a></div>
         </div>
         <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-          <figure id="avatar">
-          </figure>
-          <form>
-            <div class="form-group">
-              <label for="avatarFile">选择头像</label>
-              <input type="file" class="form-control-file" id="avatarFile">
+          <img id="avatar" src="/img/users/default.png" alt="这里是头像"/>
+          <div class="input-group w-50">
+            <div class="custom-file">
+              <input onchange="showAvatarFile(this.files[0])" type="file" class="custom-file-input" id="avatarFile" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" required>
+              <label id="filename_label" class="custom-file-label" for="avatarFile">选择头像，大小不超过5M</label>
             </div>
-          </form>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="upload_avatar()">上传</button>
+            </div>
+          </div>
         </div>
         <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
           没有消息呀~
@@ -174,8 +191,93 @@
             </form>
           </div>
         </div>
+        <div class="tab-pane fade" id="list-manager" role="tabpanel" aria-labelledby="list-manager-list">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb clearfix">
+              <li class="breadcrumb-item active float-left" aria-current="page">练习平台</li>
+              <a class="ml-auto" data-id="add-platform" data-toggle="modal" data-target="#staticBackdrop">添加</a>
+            </ol>
+          </nav>
+          <div class="row" id="platforms" style="margin: 15px auto;"></div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb clearfix">
+              <li class="breadcrumb-item active" aria-current="page">博客论坛</li>
+              <a class="ml-auto" data-id="add-blog" data-toggle="modal" data-target="#staticBackdrop">添加</a>
+            </ol>
+          </nav>
+          <div class="row" id="blogs" style="margin: 15px auto;"></div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" id="add_blog">
+        <div class="modal-header">
+            <h5 class="modal-title m-auto" id="staticBackdropLabel">标题</h5>
+        </div>
+        <div class="modal-body" id="addBlogModalBody">
+          <div class="form-group row d-none">
+            <label for="b_id" class="col-sm-2 col-form-label">ID：</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="b_id"></div>
+          </div>
+          <div class="form-group row">
+            <label for="b_name" class="col-sm-2 col-form-label">名称：</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="b_name"></div>
+          </div>
+          <div class="form-group row">
+              <label for="b_type" class="col-sm-2 col-form-label">类型：</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="b_type">
+                  <option value="1">博客</option>
+                  <option value="2">git仓库</option>
+                  <option value="3">论坛</option>
+                  <option value="4">团队</option>
+                  <option value="5">微信号（公众号/小程序）</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="b_url" class="col-sm-2 col-form-label">网址：</label>
+              <div class="col-sm-10"><input type="text" class="form-control" id="b_url" ></div>
+          </div>
+          <div class="form-group row">
+              <label for="b_logo" class="col-sm-2 col-form-label">图标：</label>
+              <div class="custom-file col-sm-9" style="margin-left: 15px;">
+                  <input type="file" onchange="showLogoFile(this.files[0])" class="custom-file-input" id="b_logo" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" required>
+                  <label id="blog_logo_label" class="custom-file-label" for="b_logo">选择图标，大小不超过5M</label>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="b_categroy" class="col-sm-2 col-form-label">分类：</label>
+              <div class="col-sm-10"><input type="text" class="form-control" id="b_categroy" placeholder="MISC/PWN/RE/WEB/CRYPTO/全栈" maxlength="10"></div>
+          </div>
+        </div>
+        <div class="modal-body" id="addPlatformModalBody">
+          <div class="form-group row d-none">
+            <label for="p_id" class="col-sm-2 col-form-label">ID：</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="p_id"></div>
+          </div>
+          <div class="form-group row">
+            <label for="p_name" class="col-sm-2 col-form-label">名称：</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="p_name"></div>
+          </div>
+          <div class="form-group row">
+            <label for="p_url" class="col-sm-2 col-form-label">网址：</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="p_url" ></div>
+          </div>
+          <div class="form-group row">
+            <label for="p_desc" class="col-sm-2 col-form-label">简介：</label>
+            <div class="col-sm-10"><textarea class="form-control" aria-label="简介：" id="p_desc" maxlength="40"></textarea></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary m-auto" id="staticBackButton" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary m-auto" id="staticOptButton" onclick="upsert_data()">添加/更新</button>
+        </div>
+      </div>
   </div>
 </div>
 

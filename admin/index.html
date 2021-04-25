@@ -91,15 +91,17 @@
         <div id="contents" class="pt-4">
     <div role="tabpanel" class="row">
         <!-- List group -->
-        <div class="list-group col-3" id="myList" role="tablist">
-            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">赛事管理</a>
-            <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Profile</a> -->
-            <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages" role="tab">Messages</a> -->
-            <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Settings</a> -->
+        <div class="col-3">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-event-list" data-toggle="list" href="#list-event" role="tab" aria-controls="event">赛事管理</a>
+                <a class="list-group-item list-group-item-action" id="list-platform-list" data-toggle="list" href="#list-platform" role="tab" aria-controls="platform">平台审核</a>
+                <a class="list-group-item list-group-item-action" id="list-blog-list" data-toggle="list" href="#list-blog" role="tab" aria-controls="blog">博客审核</a>
+            </div>
         </div>
         <!-- Tab panes -->
-        <div class="tab-content col-9">
-            <div class="tab-pane active" id="home" role="tabpanel">
+        <div class="col-9">
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-event-list">
                 <form id="event_form" onsubmit="return false">
                     <div class="form-group d-flex flex-row">
                         <div class="col-2">
@@ -183,9 +185,20 @@
                     </div>
                 </form>
             </div>
-            <!-- <div class="tab-pane" id="profile" role="tabpanel">...</div> -->
-            <!-- <div class="tab-pane" id="messages" role="tabpanel">...</div> -->
-            <!-- <div class="tab-pane" id="settings" role="tabpanel">...</div> -->
+            <div class="tab-pane fade" id="list-platform" role="tabpanel" aria-labelledby="list-platform-list">
+            </div>
+            <div class="tab-pane fade" id="list-blog" role="tabpanel" aria-labelledby="list-blog-list">
+                <div class="btn-group mt-4" role="group">
+                    <button type="button" data-id="0" class="btn btn-secondary">所有</button>
+                    <button type="button" data-id="1" class="btn btn-outline-secondary">博客</button>
+                    <button type="button" data-id="2" class="btn btn-outline-secondary">Github</button>
+                    <button type="button" data-id="3" class="btn btn-outline-secondary">论坛</button>
+                    <button type="button" data-id="4" class="btn btn-outline-secondary">团队</button>
+                    <button type="button" data-id="5" class="btn btn-outline-secondary">微信号</button>
+                </div>
+                <div id="blog_contents"></div>
+            </div>
+            </div>
         </div>
     </div>
 </div>

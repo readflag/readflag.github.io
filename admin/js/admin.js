@@ -6,7 +6,7 @@ $(function (){
     }else{
         $.ajax({
             type: "POST",
-            url: api_path + "/events/recent",
+            url: api_path + "/admin/events/recent",
             contentType: "application/json",
             success:function (res) {
                 if(res && res["success"]){
@@ -15,6 +15,18 @@ $(function (){
                     console.log(res["msg"]);
                 }
             }
+        });
+        $('a[data-toggle="list"]').on('shown.bs.tab', function (event) {
+            if(event.target.id=="list-platform-list"){
+                list_platforms();// 加载待审核练习平台
+            }else if(event.target.id=="list-blog-list"){
+                list_blogs();// 加载待审核博客论坛
+            }
+        });
+        $(".btn-group button").click(function(){
+            $(this).siblings().addClass("btn-outline-secondary").removeClass("btn-secondary");
+            $(this).removeClass("btn-outline-secondary").addClass("btn-secondary");
+            list_blogs();
         });
     }
     $("#event_add").click(function(){
@@ -67,7 +79,7 @@ function upsert_event(){
     $.ajax({
         type: "POST",
         dataType: "json",
-        url: api_path + "/events/upsert",
+        url: api_path + "/admin/events/upsert",
         data: $('#event_form').serialize(),
         success:function (res) {
             if(res && res["success"]){
@@ -85,4 +97,118 @@ function upsert_event(){
             alert("服务器错误");
         }
     });
+}
+function load_platforms_items(data){
+	$("#list-platform").html("");
+	var html = '<div class="row">';
+    $.each(data["result"], function (i, item) {
+        html += '<div class="card" style="width: 12rem;">'+
+            '<div class="card-body">'+
+            '<h5 class="card-title"><a href="'+item["url"]+'" target="_blank">'+item["name"]+'</a></h5>'+
+            '<p class="card-text">'+item["desc"]+'</p>'+
+            '<a href="javascript:verify_platform('+item['id']+',3);" class="card-link">拒绝</a>'+
+            '<a href="javascript:verify_platform('+item['id']+',1);" class="card-link">通过</a>'+
+            '<a href="javascript:verify_platform('+item['id']+',4);" class="card-link">删除</a>'+
+            '</div>'+
+        '</div>';
+	});
+	html += '</div>';
+	$("#list-platform").append(html);
+    $("#list-platform").append(page_html(data["total"],data["size"],data["page"]));
+}
+function load_blogs_items(data){
+	$("#blog_contents").html("");
+	var html = '<div class="row" id="blogs" style="margin: 15px auto;">';
+	$.each(data["result"], function (i, item) {
+		var type = 'blog';
+		if(item["type"]==2){
+			type = 'github';
+		}else if(item["type"]==3){
+			type = 'forum';
+		}else if(item["type"]==4){
+			type = 'team';
+		}else if(item["type"]==5){
+			type = 'wechat';
+		}
+		var logo = item["logo"];
+		if(!logo.startsWith("http")){
+			logo = window.location.origin + '/img/' + type + '/' + item["logo"];
+		}
+		var categroy = item["categroy"];
+		if(!categroy) categroy = "未分类";
+        html += '<div class="card" style="width: 12rem;">'+
+        '<img src="'+logo+'" class="card-img-top" alt="...">'+ 
+        '<div class="card-body">'+
+          '<h5 class="card-title"><a href="'+item["url"]+'" target="_blank">'+item["name"]+'</a></h5>'+
+          '<p class="card-text">'+item["categroy"]+'</p>'+
+          '<a href="javascript:verify_blog('+item['id']+',3);" class="card-link">拒绝</a>'+
+          '<a href="javascript:verify_blog('+item['id']+',1);" class="card-link">通过</a>'+
+          '<a href="javascript:verify_blog('+item['id']+',4);" class="card-link">删除</a>'+
+        '</div></div>';
+	});
+	html += "</div>";
+	$("#blog_contents").append(html);
+	$("#blog_contents").append(page_html(data["total"],data["size"],data["page"]));
+}
+function list_blogs(page){
+	var query_params = page?'?page='+page:'';
+	var type = parseInt($(".btn-secondary:first").attr("data-id"));
+	query_params += type > 0?(query_params.length>0?'&':'?')+'type='+type:'';
+	$.ajax({
+		type: "GET",
+		url: api_path + "/admin/blog/verify" + query_params,
+		success:function (res) {
+			if(res && res["success"]){
+				load_blogs_items(res["data"]);
+			}else{
+				console.log(res["msg"]);
+			}
+		}
+	});
+	window.scrollTo(0,0);
+}
+function verify_blog(id,status){
+    $.ajax({
+		type: "POST",
+		url: api_path + "/admin/blog/verify",
+        dataType: "json",
+        data: {"id": id, "status": status},
+		success:function (res) {
+			if(res && res["success"]){
+				list_blogs();
+			}else{
+				console.log(res["msg"]);
+			}
+		}
+	});
+}
+function list_platforms(page){
+    var query_params = page?'?page='+page:'';
+	$.ajax({
+		type: "GET",
+		url: api_path + "/admin/platform/verify" + query_params,
+		success:function (res) {
+			if(res && res["success"]){
+				load_platforms_items(res["data"]);
+			}else{
+				console.log(res["msg"]);
+			}
+		}
+	});
+	window.scrollTo(0,0);
+}
+function verify_platform(id,status){
+    $.ajax({
+		type: "POST",
+		url: api_path + "/admin/platform/verify",
+        dataType: "json",
+        data: {"id": id, "status": status},
+		success:function (res) {
+			if(res && res["success"]){
+				list_platforms();
+			}else{
+				console.log(res["msg"]);
+			}
+		}
+	});
 }
