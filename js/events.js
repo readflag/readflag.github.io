@@ -5,9 +5,9 @@ function load_events_items(data){
         var link = item["link"]?'<a href="'+item["link"]+'?fr=readflag" target="_blank">'+item["name"]+'</a>':'';
         var event_status = "secondary";
         if(item["status"]==0){
-            event_status = "info";
-        }else if(item["status"]==1){
             event_status = "warning";
+        }else if(item["status"]==1){
+            event_status = "info";
         }else if(item["status"]==2){
             event_status = "danger";
         }else if(item["status"]==3){
