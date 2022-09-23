@@ -2,10 +2,18 @@ function load_softs_items(data){
     $("#contents").html("");
     var html = '<div class="row">';
     $.each(data["result"], function (i, item) {
+        var apdf = "";
+        if(item["url"].indexOf("findmysoft")>0){
+            apdf = item["url"];
+        }else if(item["url"].indexOf("?")>0){
+            apdf = item["url"] + "&fr=readflag";
+        }else{
+            apdf = item["url"] + "?fr=readflag";
+        }
 		html += '<div class="col-xs-1-5">'+
 		'<div class="card border-primary mb-3" style="width: 13rem;min-height: 8.5rem;">'+
 			'<div class="card-body">'+
-				'<h5 class="card-title"><a href="'+item["url"]+'?fr=readflag" target="_blank" title="'+item["name"]+'">'+item["name"]+'</a></h5>'+
+				'<h5 class="card-title"><a href="'+apdf+'" target="_blank" title="'+item["name"]+'">'+item["name"]+'</a></h5>'+
 				'<h6 class="card-subtitle mb-2 text-muted">'+item["desc"]+'</h6>'+
 			'</div>'+
 		'</div></div>';

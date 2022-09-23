@@ -1,0 +1,58 @@
+.paydiv{
+    border-top: 2px solid #5ea4f3;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+    background-color: #ffffff;
+    padding: 0;
+    max-width: 600px;
+    margin: auto;
+}
+.paydiv .title{
+    font-size: 1.2em;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+.products{
+    background-color: #f7fbff;
+    padding: 25px;
+}
+.products .title{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+.products .item{
+    margin-bottom:1em;
+    color: #FF0000;
+}
+.products .item-name{
+    font-weight:600;
+    font-size: 0.9em;
+}
+.products .item-description{
+    font-size:0.8em;
+    opacity:0.6;
+}
+.products .item p{
+    margin-bottom:0.2em;
+}
+.products .price{
+    float: right;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+.products .total{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding-top: 19px;
+    font-weight: 600;
+    line-height: 1;
+}
+.footer{
+    padding-top: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+    margin: auto;
+}

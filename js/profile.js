@@ -133,7 +133,11 @@ $(function (){
                     }else{
                         $("#openid").html("<a href='/profile/wx_bind'>绑定微信</a>");
                     }
-                    $("#avatar").attr("src", "/img/users/" + json["headimg"]);
+                    if(json["headimg"].startsWith("http")){
+                        $("#avatar").attr("src", json["headimg"]);
+                    }else{
+                        $("#avatar").attr("src", "/img/users/" + json["headimg"]);
+                    }
                     $("#intro").val(json["desc"]);
                     $("#menu").removeClass("invisible");
                 }else if(res["msg"]){
@@ -402,7 +406,7 @@ function upd_blog(bid){
             }
         },
         error: function (data) {
-            alert("删除失败");
+            alert("查询失败");
         }
     })
 }

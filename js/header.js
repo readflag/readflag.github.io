@@ -11,7 +11,7 @@ var _hmt = _hmt || [];
         console.groupEnd();
 	}
 	var hm = document.createElement("script");
-	hm.src = "https://hm.baidu.com/hm.js?9b65cafc3c07b7543ce36e75452b8d53";
+	hm.src = "https://hm.baidu.com/hm.js?b0927f2b14548c95cfb76527b6c22751";
 	var s = document.getElementsByTagName("script")[0]; 
 	s.parentNode.insertBefore(hm, s);
 })(jQuery);
