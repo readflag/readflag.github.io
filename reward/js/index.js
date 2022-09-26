@@ -16,6 +16,11 @@ function change() {
 }
 var setOrder;
 var time;
+function close_modal(){
+    if(setOrder){
+        clearInterval(setOrder);
+    }
+}
 function check() {
     var amount = parseFloat($("select[name='amount']").val());
     if(amount>0===false){
