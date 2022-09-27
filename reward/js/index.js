@@ -61,11 +61,9 @@ function check() {
                         if(time>0){
                             time--;
                             $("#outdate").text(Math.floor(time/60)+"分"+(time%60)+"秒后过期");
-                            $.get(api_path + "/reward/notify", {"orderNo": no}, function (info) {
-                                console.log("info: "+info);
-                                info = JSON.parse(info);
-                                if(info && info.id){
-                                    $("#outdate").text("感谢您的打赏");
+                            $.get(api_path + "/reward/notify", {"orderNo": no}, function (res) {
+                                if(res && res["success"] && res["data"]["id"]){
+                                    $("#outdate").text("感谢您的打赏！");
                                     clearInterval(setOrder);
                                 }
                             })
