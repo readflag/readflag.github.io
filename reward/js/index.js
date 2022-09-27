@@ -99,7 +99,7 @@ $(function () {
                         "                        <p class=\"item-description\">来自于<b>"+data.lastest[i].buyer_logon_id+"</b>的留言:&nbsp;&nbsp;"+data.lastest[i].mark+"</p>\n" +
                         "                    </div>");
                         console.log(data.lastest[i]);
-                        total += data.lastest[i].mount;
+                        total += parseFloat(data.lastest[i].mount);
                     }
                     $("#total").text("￥"+total);
                     $("#recent").html("共收到来自["+data.total.order+"]位大爷的打赏，人民币金额共计["+data.total.money+"]元。\n" +
