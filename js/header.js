@@ -1,4 +1,4 @@
-var _hmt = _hmt || [];
+// var _hmt = _hmt || [];
 (function($){
 	$.getUrlParam = function (name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -10,10 +10,10 @@ var _hmt = _hmt || [];
         console.log('%cQQ交流群:658858223', 'padding:10px; font-size:20px; line-height:20px; color:white; text-shadow:#33BBFF -1px -3px, 0 0 20px #2addfd;background-image: linear-gradient(to right,#ff0,#990);');
         console.groupEnd();
 	}
-	var hm = document.createElement("script");
-	hm.src = "https://hm.baidu.com/hm.js?b0927f2b14548c95cfb76527b6c22751";
-	var s = document.getElementsByTagName("script")[0]; 
-	s.parentNode.insertBefore(hm, s);
+	// var hm = document.createElement("script");
+	// hm.src = "https://hm.baidu.com/hm.js?b0927f2b14548c95cfb76527b6c22751";
+	// var s = document.getElementsByTagName("script")[0]; 
+	// s.parentNode.insertBefore(hm, s);
 })(jQuery);
 // 回车搜索
 function search(e){
