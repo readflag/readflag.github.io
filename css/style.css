@@ -19,6 +19,7 @@ body {
 }
 header {
   width: 100%;
+  min-width: 1200px;
   height: 40px;
 }
 header .navbar {
@@ -65,6 +66,22 @@ header .navbar .navbar-brand img {
   width: 20%;
   float: left;
 }
+.col-sm-2,
+.col-sm-3,
+.col-sm-4 {
+  width: unset;
+}
+.navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+}
+.navbar-nav {
+  flex-direction: unset !important;
+}
+.nav-item {
+  padding: 0 5px;
+  float: left;
+}
 @media (min-width: 768px) {
   .col-sm-1-5 {
     width: 20%;
@@ -92,6 +109,7 @@ header .navbar .navbar-brand img {
 }
 #footer {
   width: 100%;
+  min-width: 1200px;
   float: left;
   padding-top: 40px;
 }
